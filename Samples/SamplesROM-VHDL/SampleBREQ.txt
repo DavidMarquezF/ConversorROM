@@ -1,0 +1,6 @@
+LDI r17,x01
+LDI r16,xFE
+ADC r16,r17
+BREQ +1
+RJMP -3
+RJMP -1

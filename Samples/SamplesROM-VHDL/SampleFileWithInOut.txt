@@ -1,0 +1,8 @@
+NOP
+LDI r16,x01
+IN r17,0
+EOR r17,r16
+BRNE -3
+NOP
+NOP
+RJMP -1
