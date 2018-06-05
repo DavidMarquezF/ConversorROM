@@ -308,6 +308,24 @@ def analizeOUT(params):
     """
     return analizeINOUT(params, True)
 
+def analizeORI(params):
+    p = params.split(",")
+    if len(p) != 2:
+        exception("ORI només té 2 paràmetres", LineProgram, ReadWriteFiles.ROM)
+
+    register = analyzeRegister(p[0])
+    hex = analyzeHex(p[1])
+    return 'ORI & "{0}" & "{1}" & "{2}"'.format(hex[:4], register, hex[4:8])
+
+def analizeANDI(params):
+    p = params.split(",")
+    if len(p) != 2:
+        exception("ANDI només té 2 paràmetres", LineProgram, ReadWriteFiles.ROM)
+
+    register = analyzeRegister(p[0])
+    hex = analyzeHex(p[1])
+    return 'ANDI & "{0}" & "{1}" & "{2}"'.format(hex[:4], register, hex[4:8])
+
 
 Options ={                  #Llista de les opciona a analitzar.
     "NOP" : analyzeNOP,
@@ -321,7 +339,9 @@ Options ={                  #Llista de les opciona a analitzar.
     "OUT": analizeOUT,
     "EOR": analizeEOR,
     "AND": analizeAND,
-    "OR" : analizeOR
+    "OR" : analizeOR,
+    "ORI" : analizeORI,
+    "ANDI":analizeANDI
 }
 
 
