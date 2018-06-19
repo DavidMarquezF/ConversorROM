@@ -37,8 +37,79 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="main-lib">
-<h1>Main Lib<a class="headerlink" href="#main-lib" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-MainLib">
+<span id="main-lib"></span><h1>Main Lib<a class="headerlink" href="#module-MainLib" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="MainLib.exception">
+<code class="descclassname">MainLib.</code><code class="descname">exception</code><span class="sig-paren">(</span><em>message</em>, <em>LineProgram=None</em>, <em>place=None</em>, <em>exitProgram=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MainLib.html#exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MainLib.exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Printeja una excepció i fa exit si cal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> &#8211; El missatge a printejar</li>
+<li><strong>LineProgram</strong> &#8211; La línia on el programa ha fallat (opcional)</li>
+<li><strong>place</strong> &#8211; El lloc/fitxer on el programa ha fallat (opcional)</li>
+<li><strong>exitProgram</strong> &#8211; Sortir del programa després de fer l&#8217;excepció, de default està a True</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="MainLib.logInfo">
+<code class="descclassname">MainLib.</code><code class="descname">logInfo</code><span class="sig-paren">(</span><em>TAG</em>, <em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MainLib.html#logInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MainLib.logInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mostra info per la pantalla</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>TAG</strong> &#8211; La tag relacionada al missatge</li>
+<li><strong>message</strong> &#8211; El missatge a printejar</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="MainLib.logSuccess">
+<code class="descclassname">MainLib.</code><code class="descname">logSuccess</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MainLib.html#logSuccess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MainLib.logSuccess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Printeja de color verd el text que se li passa</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>message</strong> &#8211; El missatge que es vol printejar</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="MainLib.warning">
+<code class="descclassname">MainLib.</code><code class="descname">warning</code><span class="sig-paren">(</span><em>message</em>, <em>LineProgram=None</em>, <em>place=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MainLib.html#warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#MainLib.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Printeja una warning</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>message</strong> &#8211; El missatge a printejar</li>
+<li><strong>LineProgram</strong> &#8211; La línia on el programa té un warning (opcional)</li>
+<li><strong>place</strong> &#8211; El lloc/fitxer on el programa té un warning (opcional)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
