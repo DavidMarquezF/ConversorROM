@@ -2,4 +2,6 @@
 Main Lib
 ==============
 
-bla  blabla
+.. automodule:: MainLib
+    :members:
+    :private-members:

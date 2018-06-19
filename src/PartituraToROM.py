@@ -69,7 +69,7 @@ def convertMidis(lines):
                     line[note] = hex(0)[1:]
             LineProgram+=1
     except ValueError:
-        exception("Error al convertir de nota a midi",LineProgram, ReadWriteFiles.ORIGINAL)
+        exception("Error al convertir de nota a midi", LineProgram, ReadWriteFiles.ORIGINAL)
 
     LineProgram=0
     return lines
@@ -101,7 +101,7 @@ def linesToROM(folder):
             LineProgram+=1
         ROM.append("RJMP -1")
     except ValueError:
-        exception("Error convertint la octava(nombre) a int",LineProgram, ReadWriteFiles.ORIGINAL)
+        exception("Error convertint la octava(nombre) a int", LineProgram, ReadWriteFiles.ORIGINAL)
 
     return "\n".join(ROM)
 

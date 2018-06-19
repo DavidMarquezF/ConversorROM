@@ -2,14 +2,16 @@
 #-*- coding: utf-8 -*-
 import sys
 
-import ROMtoVHDL,PartituraToROM,ReadWriteFiles
+import PartituraToROM
+import ROMtoVHDL
+import ReadWriteFiles
 
 
 def getVhdl():
     """
     S'encarrega de crear un directori amb els fitxers necessàris a dins. Si ja hi és fa les conversions Partitura-ROM-VHDL
     """
-    fol=ReadWriteFiles.createUseFolder()
+    fol= ReadWriteFiles.createUseFolder()
     if(not fol[1]):
         return
     fol = fol[0]
