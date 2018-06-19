@@ -1,5 +1,0 @@
-NOP
-LDI r16,x01
-ANDI r16,x02
-NOP
-ORI r16,x03
