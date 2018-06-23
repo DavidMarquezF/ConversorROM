@@ -48,9 +48,8 @@ Si no funciona, els errors mostrats per pantalla us haurien de guiar a arreglar 
 Cal tenir en compte
 ====================
 
-    * Depenent de com heu dissenyat el vostre miniAVR us haureu de fixar en els noms de les variables creades per assegurar que siguin els correctes.
-    * Si la vostra memòria de programa té xFF d'espai us haureu de fixar que el codi generat no superi a les xFF línies o el VHDL del miniAVR no us funcionarà correctament.
-    * Si la vostra memòria de prograna té més de xFF d'espai, no sabem si el programa funcionarà correctament, ja que no ho hem comprobat. Creiem que hauria de funcionar, ja que simplement saltarà de posar xFF a x100. El que no tenim clar és si seria necessàri posar x0FF o posant xFF ja anirà bé.
+Holi
+
 
 ==============================
 Documentació de les classes
