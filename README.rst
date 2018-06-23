@@ -63,3 +63,8 @@ https://davidmarquezf.github.io/ConversorROM/
 
 Per si algu li interessa saber com crear la pàgina web de sphinx i penjar-la a GitHub com la que utilitzem, en aquest link
 s'explica molt bé: https://daler.github.io/sphinxdoc-test/includeme.html
+
+Autors
+=========
+
+Irene Mollet i David Márquez
