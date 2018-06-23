@@ -4,7 +4,7 @@
 Customització
 ==============
 
-Per customitzar/afegir comandes noves (com SUBI, etc.), cal que aneu al mòdul ROMtoVHDL i a la variable global Opcions
+Per customitzar/afegir comandes noves (com SUBI, etc.), cal que aneu al mòdul :ref:`romVHDL` i a la variable global Opcions
 afegir un nou item al diccionari (key: nom comanda, value: la funció que analitza aquella instrucció). Cal tenir present que
 el value ha de ser una referència a la funció i no una crida (tal com es pot veure en totes les altres).
 

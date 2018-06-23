@@ -6,9 +6,24 @@
 Docs Conversor ROM
 ==========================================
 
-.. include:: ../../README.rst
+Projecte per facilitar la programació de la pràctica del miniAVR.
 
-Contents:
+S'encarrega de generar VHDL a partir de ROM, VHDL a partir de partitures i a generar els cicles necessàris per fer les notes midi.
+
+Customització
+--------------
+
+Afegir comandes noves és extremadament fàcil, i ho podreu fer al fitxer ROMToVHDL. Està explicat en l'apartat de :ref:`Custom`.
+
+Creador de cicles
+------------------
+
+En aquest projecte també hi incloim un creador de cicles necessàris per la primera part de la pràctica, que consiteix en crear els sintetizadors.
+
+Bàsicament us facilitarà la vida perquè no ho haureu de copiar a mà i tindreu totes les notes fetes
+
+Documentació
+=============
 
 .. toctree::
    :maxdepth: 2
