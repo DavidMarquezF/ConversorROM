@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ROM to VHDL &mdash; Conversor ROM 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Conversor ROM 1 documentation" href="index.html" />
+    <link rel="next" title="Partitura to ROM" href="PartituraToROM.html" />
+    <link rel="prev" title="ConversorROM" href="includeme.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rom-to-vhdl">
+<h1>ROM to VHDL<a class="headerlink" href="#rom-to-vhdl" title="Permalink to this headline">¶</a></h1>
+<p>Mòdul encarregat de passar de codi ROM a VHDL. S&#8217;utiltiza en el mòdul <a href="#id1"><span class="problematic" id="id2">:module:`VHDLdePartitura`</span></a> però també es pot crear un fitxer
+amb ROM i t&#8217;ho passarà a VHDL si s&#8217;executa directament aquest mòdul.</p>
+<p>Per customitzar/ampliar les instruccions que pot gestionar visiteu l&#8217;apartat de Customització.</p>
+<span class="target" id="module-ROMtoVHDL"></span><dl class="function">
+<dt id="ROMtoVHDL.analizeALU_B">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeALU_B</code><span class="sig-paren">(</span><em>parametres</em>, <em>type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeALU_B"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeALU_B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza l&#8217;ALU_B</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parametres</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</li>
+<li><strong>type</strong> &#8211; El tipus de ALU_B (recordar que  hi havia MOV, AND, EOR...)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Retorna la comanda passada a VHDL</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeAND">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeAND</code><span class="sig-paren">(</span><em>parametres</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeAND"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeAND" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza AND</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeBREQ">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeBREQ</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeBREQ"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeBREQ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza el BREQ</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeBRNE">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeBRNE</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeBRNE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeBRNE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza el BRNE</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeEOR">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeEOR</code><span class="sig-paren">(</span><em>parametres</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeEOR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeEOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza EOR</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeIN">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeIN</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeIN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeIN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza IN</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeINOUT">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeINOUT</code><span class="sig-paren">(</span><em>params</em>, <em>out</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeINOUT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeINOUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza INOUT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</li>
+<li><strong>out</strong> &#8211; Boleà que indica si és  in o out</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Retorna la comanda passada a VHDL</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeMOV">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeMOV</code><span class="sig-paren">(</span><em>parametres</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeMOV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeMOV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza el MOV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeOR">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeOR</code><span class="sig-paren">(</span><em>parametres</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeOR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza OR</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeOUT">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeOUT</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeOUT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeOUT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza OUT</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>parameters</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analizeRJMP">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analizeRJMP</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analizeRJMP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analizeRJMP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza RJMP</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analyzeADC">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analyzeADC</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analyzeADC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analyzeADC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza el ADC</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analyzeHex">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analyzeHex</code><span class="sig-paren">(</span><em>hex</em>, <em>n=8</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analyzeHex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analyzeHex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza si el valor és hexadecimal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hex</strong> &#8211; La string de l&#8217;hexadecimal. S&#8217;hauria d&#8217;esciure en format x12</li>
+<li><strong>n</strong> &#8211; El nombre de bits que ha de tenir la string retornada</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">El valor hexadecimal passat a bits de llargada n</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">analyzeHex</span><span class="p">(</span><span class="s2">&quot;x1&quot;</span><span class="p">)</span>
+<span class="go">&#39;00000001&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">analyzeHex</span><span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">&#39;0010&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analyzeLDI">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analyzeLDI</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analyzeLDI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analyzeLDI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza el LDI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>params</strong> &#8211; Paràmetres que ens passa l&#8217;usuari</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analyzeNOP">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analyzeNOP</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analyzeNOP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analyzeNOP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza la NOP</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>line</strong> &#8211; paràmetre que en aquest cas és inútil, però necessàri perquè cridem tots els analize amb un paràmetre</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna la comanda passada a VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.analyzeRegister">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">analyzeRegister</code><span class="sig-paren">(</span><em>registerStr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#analyzeRegister"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.analyzeRegister" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analitza si el registre està en el format correcte i és el que toca. El format hauría de ser de tipus r16</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>registerStr</strong> &#8211; La string del registre</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El registre passat a bits</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.getCode">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">getCode</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#getCode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.getCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obté el codi vhdl a partir d&#8217;una llista de línies escrites en ROM</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lines</strong> &#8211; Llista de línies escrites en format ROM</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El txt de VHDL resultant</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.getCodeFromFile">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">getCodeFromFile</code><span class="sig-paren">(</span><em>file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#getCodeFromFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.getCodeFromFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Funció principal. Obté el VHDL del fitxer especificat</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file</strong> &#8211; Nom del fitxer d&#8217;on s&#8217;ha d&#8217;obtenir les dades</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El txt amb tot el codi VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.getCodeFromFolder">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">getCodeFromFolder</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#getCodeFromFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.getCodeFromFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Funció principal. Obté el VHDL del fitxer ROM que està dins del directori</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> &#8211; El directori on hi ha els fitxers requerits</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El txt amb tot el codi VHDL</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="ROMtoVHDL.readFile">
+<code class="descclassname">ROMtoVHDL.</code><code class="descname">readFile</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ROMtoVHDL.html#readFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ROMtoVHDL.readFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Llegeix el fitxer dins del directori</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> &#8211; Directori on hi ha el fitxer ROM</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El txt amb tot el text</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="includeme.html" title="previous chapter">ConversorROM</a></li>
+      <li>Next: <a href="PartituraToROM.html" title="next chapter">Partitura to ROM</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/ROMToVHDL.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Irene Mollet i David Márquez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/ROMToVHDL.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

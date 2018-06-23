@@ -12,8 +12,11 @@ Contents:
    :maxdepth: 2
 
    includeme
-   MainLib
+   ROMToVHDL
    PartituraToROM
+   VHDLdePartitura
+   ReadWriteFiles
+   MainLib
 
 Indices and tables
 ==================

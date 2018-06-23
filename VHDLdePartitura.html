@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python Module Index &mdash; Conversor ROM 1 documentation</title>
+    <title>VHDL de Partitura &mdash; Conversor ROM 1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,16 +24,11 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Conversor ROM 1 documentation" href="index.html" />
-
+    <link rel="next" title="Read Write Files" href="ReadWriteFiles.html" />
+    <link rel="prev" title="Partitura to ROM" href="PartituraToROM.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-
-    <script type="text/javascript">
-      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
-    </script>
-
 
   </head>
   <body role="document">  
@@ -43,55 +38,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
+  <div class="section" id="vhdl-de-partitura">
+<h1>VHDL de Partitura<a class="headerlink" href="#vhdl-de-partitura" title="Permalink to this headline">¶</a></h1>
+<p>Mòdul encarregat d&#8217;unir els mòduls ROMtoVHDL i PartituraToROM per poder generar generar el codi ROM i VHDL a partir d&#8217;una partitura</p>
+<p>És a dir que aquest mòdul és el que s&#8217;haurà de fer servir per generar el codi VHDL.</p>
+<span class="target" id="module-VHDLdePartitura"></span><dl class="function">
+<dt id="VHDLdePartitura.getVhdl">
+<code class="descclassname">VHDLdePartitura.</code><code class="descname">getVhdl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/VHDLdePartitura.html#getVhdl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#VHDLdePartitura.getVhdl" title="Permalink to this definition">¶</a></dt>
+<dd><p>S&#8217;encarrega de crear un directori amb els fitxers necessàris a dins. Si ja hi és fa les conversions Partitura-ROM-VHDL</p>
+</dd></dl>
 
-   <h1>Python Module Index</h1>
-
-   <div class="modindex-jumpbox">
-   <a href="#cap-m"><strong>m</strong></a> | 
-   <a href="#cap-p"><strong>p</strong></a> | 
-   <a href="#cap-r"><strong>r</strong></a> | 
-   <a href="#cap-v"><strong>v</strong></a>
-   </div>
-
-   <table class="indextable modindextable" cellspacing="0" cellpadding="2">
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-m"><td></td><td>
-       <strong>m</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="MainLib.html#module-MainLib"><code class="xref">MainLib</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-p"><td></td><td>
-       <strong>p</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="PartituraToROM.html#module-PartituraToROM"><code class="xref">PartituraToROM</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-r"><td></td><td>
-       <strong>r</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="ReadWriteFiles.html#module-ReadWriteFiles"><code class="xref">ReadWriteFiles</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="ROMToVHDL.html#module-ROMtoVHDL"><code class="xref">ROMtoVHDL</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-v"><td></td><td>
-       <strong>v</strong></td><td></td></tr>
-     <tr>
-       <td></td>
-       <td>
-       <a href="VHDLdePartitura.html#module-VHDLdePartitura"><code class="xref">VHDLdePartitura</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+</div>
 
 
           </div>
@@ -102,9 +59,18 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="PartituraToROM.html" title="previous chapter">Partitura to ROM</a></li>
+      <li>Next: <a href="ReadWriteFiles.html" title="next chapter">Read Write Files</a></li>
   </ul></li>
 </ul>
 </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/VHDLdePartitura.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -129,6 +95,9 @@
       Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
       
+      |
+      <a href="_sources/VHDLdePartitura.txt"
+          rel="nofollow">Page source</a>
     </div>
 
     

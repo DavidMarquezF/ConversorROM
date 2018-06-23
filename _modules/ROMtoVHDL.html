@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ROMtoVHDL &mdash; Conversor ROM 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Conversor ROM 1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ROMtoVHDL</h1><div class="highlight"><pre>
+<span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#-*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">ReadWriteFiles</span>
+<span class="kn">from</span> <span class="nn">MainLib</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">ROMout</span> <span class="o">=</span><span class="s2">&quot;pr_op&quot;</span>
+<span class="n">ProgramCounter</span><span class="o">=</span><span class="s2">&quot;pr_pc&quot;</span>
+
+<span class="n">LineProgram</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">startText</span> <span class="o">=</span> <span class="s2">&quot;ROM : process ({0}) is</span><span class="se">\n</span><span class="s2">begin</span><span class="se">\n\t</span><span class="s2">case {1} is</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ProgramCounter</span><span class="p">,</span> <span class="n">ProgramCounter</span><span class="p">)</span>
+<span class="n">endText</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">when others =&gt; {0} &lt;= (others =&gt; &#39;-&#39;);</span><span class="se">\n\t</span><span class="s2">end case;</span><span class="se">\n</span><span class="s2">end process;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ROMout</span><span class="p">)</span>
+
+<span class="n">INPorts</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">OUTPorts</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="n">startRegisterNum</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">endRegisterNum</span><span class="o">=</span><span class="mi">32</span>
+
+<div class="viewcode-block" id="readFile"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.readFile">[docs]</a><span class="k">def</span> <span class="nf">readFile</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Llegeix el fitxer dins del directori</span>
+
+<span class="sd">    :param folder: Directori on hi ha el fitxer ROM</span>
+<span class="sd">    :return: El txt amb tot el text</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">readlines</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">l</span> <span class="k">if</span> <span class="n">l</span> <span class="o">!=</span> <span class="bp">False</span> <span class="k">else</span> <span class="nb">exit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="getCodeFromFolder"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.getCodeFromFolder">[docs]</a><span class="k">def</span> <span class="nf">getCodeFromFolder</span><span class="p">(</span><span class="n">folder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funció principal. Obté el VHDL del fitxer ROM que està dins del directori</span>
+
+<span class="sd">    :param folder: El directori on hi ha els fitxers requerits</span>
+<span class="sd">    :return: El txt amb tot el codi VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">readFile</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">getCode</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="getCodeFromFile"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.getCodeFromFile">[docs]</a><span class="k">def</span> <span class="nf">getCodeFromFile</span><span class="p">(</span><span class="nb">file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Funció principal. Obté el VHDL del fitxer especificat</span>
+
+<span class="sd">    :param file: Nom del fitxer d&#39;on s&#39;ha d&#39;obtenir les dades</span>
+<span class="sd">    :return: El txt amb tot el codi VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;El fitxer {0} no existeix&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">getCode</span><span class="p">(</span><span class="n">l</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="getCode"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.getCode">[docs]</a><span class="k">def</span> <span class="nf">getCode</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Obté el codi vhdl a partir d&#39;una llista de línies escrites en ROM</span>
+
+<span class="sd">    :param lines: Llista de línies escrites en format ROM</span>
+<span class="sd">    :return: El txt de VHDL resultant</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logInfo</span><span class="p">(</span><span class="s2">&quot;ROM-VHDL&quot;</span><span class="p">,</span> <span class="s2">&quot;Iniciant conversió de ROM a VHDL&quot;</span><span class="p">)</span>
+
+    <span class="n">txt</span><span class="o">=</span><span class="n">startText</span>
+    <span class="n">counter</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="k">global</span> <span class="n">LineProgram</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">txt</span> <span class="o">+=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">when x&quot;{:02x}&quot; =&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+            <span class="n">li</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">txt</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">{0} &lt;= {1};</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ROMout</span><span class="p">,</span> <span class="n">Options</span><span class="p">[</span><span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">]](</span><span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">li</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;NOP&quot;</span> <span class="k">else</span> <span class="n">li</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="n">LineProgram</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">txt</span> <span class="o">+=</span> <span class="n">endText</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Clau no correcta&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="n">logSuccess</span><span class="p">(</span><span class="s2">&quot;Conversió de ROM a VHDL s&#39;ha fet correctament&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">txt</span></div>
+
+<div class="viewcode-block" id="analyzeRegister"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analyzeRegister">[docs]</a><span class="k">def</span> <span class="nf">analyzeRegister</span><span class="p">(</span><span class="n">registerStr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza si el registre està en el format correcte i és el que toca. El format hauría de ser de tipus r16</span>
+
+<span class="sd">    :param registerStr: La string del registre</span>
+<span class="sd">    :return: El registre passat a bits</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">registerStr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;El format del registre {0} no és valid &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">registerStr</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">startRegisterNum</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">registerStr</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">&lt;=</span> <span class="n">endRegisterNum</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;El registre ha d&#39;estar entre {0} and {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">startRegisterNum</span><span class="p">,</span> <span class="n">endRegisterNum</span><span class="p">),</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="k">return</span>  <span class="s2">&quot;{0:b}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">registerStr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span></div>
+
+<div class="viewcode-block" id="analyzeHex"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analyzeHex">[docs]</a><span class="k">def</span> <span class="nf">analyzeHex</span><span class="p">(</span><span class="nb">hex</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza si el valor és hexadecimal</span>
+
+<span class="sd">    :param hex: La string de l&#39;hexadecimal. S&#39;hauria d&#39;esciure en format x12</span>
+<span class="sd">    :param n: El nombre de bits que ha de tenir la string retornada</span>
+<span class="sd">    :return: El valor hexadecimal passat a bits de llargada n</span>
+
+<span class="sd">    &gt;&gt;&gt; analyzeHex(&quot;x1&quot;)</span>
+<span class="sd">    &#39;00000001&#39;</span>
+<span class="sd">    &gt;&gt;&gt; analyzeHex(&quot;x2&quot;, 4)</span>
+<span class="sd">    &#39;0010&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">hexVal</span> <span class="o">=</span> <span class="nb">hex</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">hexVal</span><span class="p">,</span> <span class="mi">16</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;El registre {0} no està en el format correcte&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">hex</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="analyzeNOP"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analyzeNOP">[docs]</a><span class="k">def</span> <span class="nf">analyzeNOP</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza la NOP</span>
+
+<span class="sd">    :param line: paràmetre que en aquest cas és inútil, però necessàri perquè cridem tots els analize amb un paràmetre</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;NOP &amp; &quot;0000&quot; &amp; &quot;--------&quot;&#39;</span></div>
+
+<div class="viewcode-block" id="analyzeLDI"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analyzeLDI">[docs]</a><span class="k">def</span> <span class="nf">analyzeLDI</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza el LDI</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;LDI només té 2 paràmetres&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="n">register</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">hex</span> <span class="o">=</span> <span class="n">analyzeHex</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;LDI &amp; &quot;{0}&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">hex</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">register</span><span class="p">,</span> <span class="nb">hex</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="analyzeADC"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analyzeADC">[docs]</a><span class="k">def</span> <span class="nf">analyzeADC</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza el ADC</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;ADC has only 2 params&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="n">registre1</span><span class="o">=</span><span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">registre2</span><span class="o">=</span><span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;ADC &amp; &quot;1111&quot; &amp; &quot;{0}&quot; &amp; &quot;{1}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">registre1</span><span class="p">,</span><span class="n">registre2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeALU_B"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeALU_B">[docs]</a><span class="k">def</span> <span class="nf">analizeALU_B</span><span class="p">(</span><span class="n">parametres</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza l&#39;ALU_B</span>
+
+<span class="sd">    :param parametres: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :param type: El tipus de ALU_B (recordar que  hi havia MOV, AND, EOR...)</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">parametres</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;{0} només té 2 paràmetres&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">),</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="n">registre1</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">registre2</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;ALU_B &amp; {0} &amp; &quot;00&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">registre1</span><span class="p">,</span> <span class="n">registre2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeRJMP"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeRJMP">[docs]</a><span class="k">def</span> <span class="nf">analizeRJMP</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza RJMP</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;RJMP només té 1 paràmetre&quot;</span><span class="p">)</span>
+
+        <span class="n">jump</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">12</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;RJMP &amp; &quot;----&quot; &amp; &quot;{0}&quot; &amp; &quot;{1}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jump</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">],</span><span class="n">jump</span><span class="p">[</span><span class="mi">8</span><span class="p">:])</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeBREQ"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeBREQ">[docs]</a><span class="k">def</span> <span class="nf">analizeBREQ</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza el BREQ</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;BREQ només té 1 paràmetre&quot;</span><span class="p">)</span>
+        <span class="n">jump</span><span class="o">=</span><span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">7</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;BRANCH &amp; &quot;00{0}&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}001&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jump</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">jump</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">jump</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="analizeBRNE"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeBRNE">[docs]</a><span class="k">def</span> <span class="nf">analizeBRNE</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza el BRNE</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;BRNE només té 1 paràmetre&quot;</span><span class="p">)</span>
+        <span class="n">jump</span><span class="o">=</span><span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">7</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;BRANCH &amp; &quot;01{0}&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}001&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">jump</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">jump</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">jump</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeMOV"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeMOV">[docs]</a><span class="k">def</span> <span class="nf">analizeMOV</span><span class="p">(</span><span class="n">parametres</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza el MOV</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">analizeALU_B</span><span class="p">(</span><span class="n">parametres</span><span class="p">,</span> <span class="s2">&quot;ALU_B_MOV&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeAND"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeAND">[docs]</a><span class="k">def</span> <span class="nf">analizeAND</span><span class="p">(</span><span class="n">parametres</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza AND</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">analizeALU_B</span><span class="p">(</span><span class="n">parametres</span><span class="p">,</span> <span class="s2">&quot;ALU_B_AND&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeOR"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeOR">[docs]</a><span class="k">def</span> <span class="nf">analizeOR</span><span class="p">(</span><span class="n">parametres</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza OR</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">analizeALU_B</span><span class="p">(</span><span class="n">parametres</span><span class="p">,</span> <span class="s2">&quot;ALU_B_OR&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeEOR"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeEOR">[docs]</a><span class="k">def</span> <span class="nf">analizeEOR</span><span class="p">(</span><span class="n">parametres</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza EOR</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">analizeALU_B</span><span class="p">(</span><span class="n">parametres</span><span class="p">,</span> <span class="s2">&quot;ALU_B_EOR&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeINOUT"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeINOUT">[docs]</a><span class="k">def</span> <span class="nf">analizeINOUT</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">out</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza INOUT</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :param out: Boleà que indica si és  in o out</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;INOUT només té 2 paràmetres&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">out</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">registre</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">out</span> <span class="ow">and</span> <span class="n">valor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INPorts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;In només pot ser {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">INPorts</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="n">out</span> <span class="ow">and</span> <span class="n">valor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OUTPorts</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Out només pot ser {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">OUTPorts</span><span class="p">)))</span>
+
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;INOUT valor ha de ser un nombre decimal&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s1">&#39;IN_OUT &amp; &quot;{0}000&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">out</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span> <span class="n">registre</span><span class="p">,</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">valor</span><span class="p">))[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="analizeIN"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeIN">[docs]</a><span class="k">def</span> <span class="nf">analizeIN</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza IN</span>
+
+<span class="sd">    :param params: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">analizeINOUT</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="analizeOUT"><a class="viewcode-back" href="../ROMToVHDL.html#ROMtoVHDL.analizeOUT">[docs]</a><span class="k">def</span> <span class="nf">analizeOUT</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analitza OUT</span>
+
+<span class="sd">    :param parameters: Paràmetres que ens passa l&#39;usuari</span>
+<span class="sd">    :return: Retorna la comanda passada a VHDL</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">analizeINOUT</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">analizeORI</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;ORI només té 2 paràmetres&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="n">register</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">hex</span> <span class="o">=</span> <span class="n">analyzeHex</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;ORI &amp; &quot;{0}&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">hex</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">register</span><span class="p">,</span> <span class="nb">hex</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">analizeANDI</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">exception</span><span class="p">(</span><span class="s2">&quot;ANDI només té 2 paràmetres&quot;</span><span class="p">,</span> <span class="n">LineProgram</span><span class="p">,</span> <span class="n">ReadWriteFiles</span><span class="o">.</span><span class="n">ROM</span><span class="p">)</span>
+
+    <span class="n">register</span> <span class="o">=</span> <span class="n">analyzeRegister</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">hex</span> <span class="o">=</span> <span class="n">analyzeHex</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;ANDI &amp; &quot;{0}&quot; &amp; &quot;{1}&quot; &amp; &quot;{2}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">hex</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">register</span><span class="p">,</span> <span class="nb">hex</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+
+
+<span class="n">Options</span> <span class="o">=</span><span class="p">{</span>                  <span class="c1">#Llista de les opciona a analitzar.</span>
+    <span class="s2">&quot;NOP&quot;</span> <span class="p">:</span> <span class="n">analyzeNOP</span><span class="p">,</span>
+    <span class="s2">&quot;LDI&quot;</span> <span class="p">:</span> <span class="n">analyzeLDI</span><span class="p">,</span>
+    <span class="s2">&quot;ADC&quot;</span> <span class="p">:</span> <span class="n">analyzeADC</span><span class="p">,</span>
+    <span class="s2">&quot;MOV&quot;</span> <span class="p">:</span> <span class="n">analizeMOV</span><span class="p">,</span>
+    <span class="s2">&quot;RJMP&quot;</span> <span class="p">:</span><span class="n">analizeRJMP</span><span class="p">,</span>
+    <span class="s2">&quot;BREQ&quot;</span><span class="p">:</span> <span class="n">analizeBREQ</span><span class="p">,</span>
+    <span class="s2">&quot;BRNE&quot;</span><span class="p">:</span> <span class="n">analizeBRNE</span><span class="p">,</span>
+    <span class="s2">&quot;IN&quot;</span> <span class="p">:</span> <span class="n">analizeIN</span><span class="p">,</span>
+    <span class="s2">&quot;OUT&quot;</span><span class="p">:</span> <span class="n">analizeOUT</span><span class="p">,</span>
+    <span class="s2">&quot;EOR&quot;</span><span class="p">:</span> <span class="n">analizeEOR</span><span class="p">,</span>
+    <span class="s2">&quot;AND&quot;</span><span class="p">:</span> <span class="n">analizeAND</span><span class="p">,</span>
+    <span class="s2">&quot;OR&quot;</span> <span class="p">:</span> <span class="n">analizeOR</span><span class="p">,</span>
+    <span class="s2">&quot;ORI&quot;</span> <span class="p">:</span> <span class="n">analizeORI</span><span class="p">,</span>
+    <span class="s2">&quot;ANDI&quot;</span><span class="p">:</span><span class="n">analizeANDI</span>
+<span class="p">}</span>
+
+
+<span class="k">if</span> <span class="p">(</span><span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">getCodeFromFile</span><span class="p">(</span><span class="nb">raw_input</span><span class="p">(</span><span class="s2">&quot;Escriu el nom del fitxer on hi tens el codi: &quot;</span><span class="p">))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Irene Mollet i David Márquez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
