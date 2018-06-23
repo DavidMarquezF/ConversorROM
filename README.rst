@@ -32,7 +32,7 @@ Es podria convertir en un executable molt fàcilment però no ho hem trobat nece
 Es demanarà que s'esculli un directori a on guardar la info. Poseu el nom que trobeu convenient.
 Donarà informació i us crearà el directori. Si tot ha anat bé us hauria de sortir un text verd que ho confirma.
 
-Haurieu de tenir el directori creat. Ara cal modificar el fitxer Partitura.txt. A dins escriviu la partitura d'aquesta manera
+Haurieu de tenir el directori creat. Ara cal modificar el fitxer Partitura.txt. A dins escriviu la partitura d'aquesta manera::
 
     Nota1 Nota2 Nota3 temps
 
@@ -63,8 +63,3 @@ https://davidmarquezf.github.io/ConversorROM/
 
 Per si algu li interessa saber com crear la pàgina web de sphinx i penjar-la a GitHub com la que utilitzem, en aquest link
 s'explica molt bé: https://daler.github.io/sphinxdoc-test/includeme.html
-
-Autors
-============
-
-Irene Mollet i David Márquez
