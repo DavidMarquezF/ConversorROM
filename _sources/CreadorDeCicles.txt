@@ -8,6 +8,6 @@ escriviu un per un els cicles necessàris per fer cada nota.
 Si executeu aquest fitxer us crearà totes les notes possibles amb la llargada de la senyal de cicles que utilitzeu (de 0 a 127).
 Us serà útil perquè no ho haureu de copiar tot a mà i a més a més tindreu més notes de les que hi ha al fitxer que us dóna el professor.
 
-.. automodule:: CreadorDeCiclesNecessaris
+.. automodule:: VHDLSintetitzadorNotes/CreadorDeCiclesNecessaris
     :members:
     :private-members:
