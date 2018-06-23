@@ -48,8 +48,37 @@
 <div class="section" id="creador-de-cicles">
 <h2>Creador de cicles<a class="headerlink" href="#creador-de-cicles" title="Permalink to this headline">¶</a></h2>
 <p>En aquest projecte també hi incloim un creador de cicles necessàris per la primera part de la pràctica, que consiteix en crear els sintetizadors.</p>
-<p>Bàsicament us facilitarà la vida perquè no ho haureu de copiar a mà i tindreu totes les notes fetes</p>
+<p>Bàsicament us facilitarà la vida perquè no ho haureu de copiar a mà i tindreu totes les notes fetes.</p>
 </div>
+</div>
+<div class="section" id="com-funciona">
+<h1>Com funciona?<a class="headerlink" href="#com-funciona" title="Permalink to this headline">¶</a></h1>
+<p>Per fer la conversió de partitures s&#8217;ha de fer cridant la comanda:</p>
+<div class="highlight-python"><div class="highlight"><pre>python VHDLdePartitura.py
+</pre></div>
+</div>
+<p>Es podria convertir en un executable molt fàcilment però no ho hem trobat necessàri.</p>
+<p>Es demanarà que s&#8217;esculli un directori a on guardar la info. Poseu el nom que trobeu convenient.
+Donarà informació i us crearà el directori. Si tot ha anat bé us hauria de sortir un text verd que ho confirma.</p>
+<p>Haurieu de tenir el directori creat. Ara cal modificar el fitxer Partitura.txt. A dins escriviu la partitura d&#8217;aquesta manera:</p>
+<div class="highlight-python"><div class="highlight"><pre>Nota1 Nota2 Nota3 temps
+</pre></div>
+</div>
+<p>Està més ben explicat a la documentació en l&#8217;apartat de PartituraToROM.</p>
+<p>Un cop heu fet la partitura, cal que torneu a executar el fitxer python VHDLdePartitura un altre cop i quan us demani el directori
+posar-li el que hi teniu la partitura.</p>
+<p>Si tot va bé, ja haurieu de tenir el fitxer ROM i el fitxer VHDL amb el codi corresponent.
+Si no funciona, els errors mostrats per pantalla us haurien de guiar a arreglar el codi que hagueu fet.</p>
+</div>
+<div class="section" id="cal-tenir-en-compte">
+<h1>Cal tenir en compte<a class="headerlink" href="#cal-tenir-en-compte" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li>Depenent de com heu dissenyat el vostre miniAVR us haureu de fixar en els noms de les variables creades per assegurar que siguin els correctes.</li>
+<li>Si la vostra memòria de programa té xFF d&#8217;espai us haureu de fixar que el codi generat no superi a les xFF línies o el VHDL del miniAVR no us funcionarà correctament.</li>
+<li>Si la vostra memòria de prograna té més de xFF d&#8217;espai, no sabem si el programa funcionarà correctament, ja que no ho hem comprobat. Creiem que hauria de funcionar, ja que simplement saltarà de posar xFF a x100. El que no tenim clar és si seria necessàri posar x0FF o posant xFF ja anirà bé.</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="documentacio">
 <h1>Documentació<a class="headerlink" href="#documentacio" title="Permalink to this headline">¶</a></h1>
@@ -87,6 +116,8 @@
 <li><a class="reference internal" href="#creador-de-cicles">Creador de cicles</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#com-funciona">Com funciona?</a></li>
+<li><a class="reference internal" href="#cal-tenir-en-compte">Cal tenir en compte</a></li>
 <li><a class="reference internal" href="#documentacio">Documentació</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
