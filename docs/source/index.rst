@@ -19,6 +19,7 @@ Contents:
    ReadWriteFiles
    MainLib
    CreadorDeCicles
+   Customitzacio
 
 Indices and tables
 ==================
