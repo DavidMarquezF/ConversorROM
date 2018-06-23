@@ -9,7 +9,9 @@ S'encarrega de generar VHDL a partir de ROM, VHDL a partir de partitures i a gen
 Customització
 --------------
 
-Afegir comandes noves és extremadament fàcil, i ho podreu fer al fitxer ROMToVHDL. Està explicat en l'apartat de Customització.
+Afegir comandes noves és extremadament fàcil, i ho podreu fer al fitxer ROMToVHDL. Està explicat en l'apartat de :ref:`Custom`.
+
+https://davidmarquezf.github.io/ConversorROM/Customitzacio.html
 
 Creador de cicles
 ------------------
