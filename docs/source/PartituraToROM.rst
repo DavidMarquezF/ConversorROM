@@ -6,7 +6,7 @@ Passa d'una partitura escrita en el format especificat més endavant a ROM.
 
 En un fitxer s'ha de guardar una partitura de la següent manera:
 
-    Nota1 Nota2 Nota3 temps
+        Nota1 Nota2 Nota3 temps
 
 Nota ha de ser del format: C7,D12, etc.
 Els cicles que poseu l'haurieu d'haver calculat vosaltres depenent del preescaler (cicles de c_limit)

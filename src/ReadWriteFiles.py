@@ -115,16 +115,3 @@ def readlines(folderName, type):
         l[line] = l[line].rstrip("\n")
     f.close()
     return l
-def askYorNQuestion(question):
-    """
-    Pregunta una pregunta de sí o no.
-
-    :param question: La pregunta que es vol fer a l'usuari
-    :return: True o False depenent del que ha triat l'usuari
-    """
-    while (True):
-        answerUser = raw_input(question + "(Y/N) ")
-        if (answerUser == "N" or answerUser == "n"):
-            return False
-        if (answerUser == "Y" or answerUser == "y"):
-            return True
