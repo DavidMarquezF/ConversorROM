@@ -43,6 +43,35 @@
 escriviu un per un els cicles necessàris per fer cada nota.</p>
 <p>Si executeu aquest fitxer us crearà totes les notes possibles amb la llargada de la senyal de cicles que utilitzeu (de 0 a 127).
 Us serà útil perquè no ho haureu de copiar tot a mà i a més a més tindreu més notes de les que hi ha al fitxer que us dóna el professor.</p>
+<span class="target" id="module-CreadorDeCiclesNecessaris"></span><div class="section" id="id1">
+<h2>Creador de cicles<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Aquest mòdul s&#8217;encarrega de printejar els cicles que es necessiten per generar les freqüències necessàries per fer
+sonar les notes. Amb aquest sistema es pot arribar a generar totes les freqüències necessàries.</p>
+<p>Els cicles són iguals que els que es poden veure en el fitxer penjat a Atenea, però us estalvieu copiar-los i a més a més
+tindreu totes les notes que volgueu.</p>
+<dl class="function">
+<dt id="CreadorDeCiclesNecessaris.cicles">
+<code class="descclassname">CreadorDeCiclesNecessaris.</code><code class="descname">cicles</code><span class="sig-paren">(</span><em>midi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CreadorDeCiclesNecessaris.html#cicles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CreadorDeCiclesNecessaris.cicles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcula els cicles necessàris per fer sonar la nota amb la clau midi</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>midi</strong> &#8211; Clau midi</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Nombre de cicles necessàris</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="CreadorDeCiclesNecessaris.creacicles">
+<code class="descclassname">CreadorDeCiclesNecessaris.</code><code class="descname">creacicles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/CreadorDeCiclesNecessaris.html#creacicles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#CreadorDeCiclesNecessaris.creacicles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Printeja els cicles necessàris de la nota midi 0 a la 127 (es pot ampliar tant com sigui necessàri)</p>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -50,7 +79,15 @@ Us serà útil perquè no ho haureu de copiar tot a mà i a més a més tindreu 
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Creador de cicles</a><ul>
+<li><a class="reference internal" href="#id1">Creador de cicles</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
