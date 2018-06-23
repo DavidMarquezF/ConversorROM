@@ -36,6 +36,6 @@ def creacicles():
     for key, value in midi.items():
         print liniaDefault.format(value, variableCiclesNecessaris, key)
 
-
-creacicles()
+if __name__ == "__main__":
+    creacicles()
 
