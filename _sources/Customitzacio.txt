@@ -12,7 +12,7 @@ a binari (analizeRegister i analizeHex).
 La vostra funció que analitza ha de tenir dun paràmetre. Aquest equival a els paràmetres que t'han passat en forma de string. És a dir que si
 per exemple et criden::
 
-LDI r16,x01
+    LDI r16,x01
 
 Es cridaria la funció passant-li el paràmetre "r16,x01".
 

@@ -46,7 +46,9 @@ el value ha de ser una referència a la funció i no una crida (tal com es pot v
 a binari (analizeRegister i analizeHex).</p>
 <p>La vostra funció que analitza ha de tenir dun paràmetre. Aquest equival a els paràmetres que t&#8217;han passat en forma de string. És a dir que si
 per exemple et criden:</p>
-<p>LDI r16,x01</p>
+<div class="highlight-python"><div class="highlight"><pre>LDI r16,x01
+</pre></div>
+</div>
 <p>Es cridaria la funció passant-li el paràmetre &#8220;r16,x01&#8221;.</p>
 <p>Un cop això ja està creat ja no heu de fer res, ja que el programa se n&#8217;encarrega de la resta.</p>
 <p>Hi ha variables amb strings que podeu variar depenent de com heu fet el VHDL. Per exemple la variable Program_Counter
