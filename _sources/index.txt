@@ -18,6 +18,7 @@ Contents:
    VHDLdePartitura
    ReadWriteFiles
    MainLib
+   CreadorDeCicles
 
 Indices and tables
 ==================
