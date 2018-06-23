@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Partitura to ROM &mdash; Conversor ROM 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Conversor ROM 1 documentation" href="index.html" />
+    <link rel="prev" title="Main Lib" href="MainLib.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="partitura-to-rom">
+<h1>Partitura to ROM<a class="headerlink" href="#partitura-to-rom" title="Permalink to this headline">¶</a></h1>
+<p>Passa d&#8217;una partitura escrita en el format especificat més endavant a ROM.</p>
+<p>En un fitxer s&#8217;ha de guardar una partitura de la següent manera:</p>
+<blockquote>
+<div>Nota1 Nota2 Nota3 temps</div></blockquote>
+<p>Nota ha de ser del format: C7,D12, etc.
+Els cicles que poseu l&#8217;haurieu d&#8217;haver calculat vosaltres depenent del preescaler (cicles de c_limit)</p>
+<span class="target" id="module-PartituraToROM"></span><dl class="function">
+<dt id="PartituraToROM.convertMidis">
+<code class="descclassname">PartituraToROM.</code><code class="descname">convertMidis</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PartituraToROM.html#convertMidis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PartituraToROM.convertMidis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convertiex els midis: A partir de la llista amb les línies de la partitura passa les notes a midi</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>lines</strong> &#8211; Les línies de la partitura dividides en notes</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Les línies de la partitura dividides en claus midi</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PartituraToROM.getMidi">
+<code class="descclassname">PartituraToROM.</code><code class="descname">getMidi</code><span class="sig-paren">(</span><em>note</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PartituraToROM.html#getMidi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PartituraToROM.getMidi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcula el valor midi a partir de la nota escrita</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>note</strong> &#8211; La string de la nota, que està en format C1,B3, Bb1, G#</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El int de la clau midi</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PartituraToROM.linesToROM">
+<code class="descclassname">PartituraToROM.</code><code class="descname">linesToROM</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PartituraToROM.html#linesToROM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PartituraToROM.linesToROM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fa la conversió a partir del directori on hi ha la partitura a ROM</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> &#8211; El directori on hi ha els fitxer de Partitura i ROM</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Retorna el text de ROM</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="PartituraToROM.readFile">
+<code class="descclassname">PartituraToROM.</code><code class="descname">readFile</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PartituraToROM.html#readFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#PartituraToROM.readFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Llegeix el fitxer dins del directori</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> &#8211; Directori on hi ha el fitxer ROM</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">El txt amb tot el text</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="MainLib.html" title="previous chapter">Main Lib</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/PartituraToROM.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Irene Mollet i David Márquez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/PartituraToROM.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

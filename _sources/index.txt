@@ -13,6 +13,7 @@ Contents:
 
    includeme
    MainLib
+   PartituraToROM
 
 Indices and tables
 ==================
