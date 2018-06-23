@@ -69,5 +69,3 @@ Autors
 =========
 
 Irene Mollet i David Márquez
-a
-
