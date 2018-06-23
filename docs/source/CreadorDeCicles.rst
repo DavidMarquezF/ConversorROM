@@ -1,0 +1,13 @@
+==================
+Creador de cicles
+==================
+
+Aquest és un mòdul que pot ser útil a l'inici de la pràctica, quan s'ha de crear els sintetitzadors. A la part on se us demana que
+escriviu un per un els cicles necessàris per fer cada nota.
+
+Si executeu aquest fitxer us crearà totes les notes possibles amb la llargada de la senyal de cicles que utilitzeu (de 0 a 127).
+Us serà útil perquè no ho haureu de copiar tot a mà i a més a més tindreu més notes de les que hi ha al fitxer que us dóna el professor.
+
+.. automodule:: CreadorDeCiclesNecessaris
+    :members:
+    :private-members:
